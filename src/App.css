@@ -1,0 +1,48 @@
+h1{
+  color:#ff0000
+}
+
+
+#sidebar{
+  display:flex;
+  float:left;
+  border:1px;
+  /*border-color:silver;*/
+  /*border-style:solid;*/
+  /*border-radius:0.25em;*/
+  padding:0.25em;
+  height:100%;
+  color: red;
+}
+
+#addURL{
+  width:4em;
+  padding-right:2em;
+}
+
+#center{
+  margin-left:7rem;
+  border:1px;
+  border-color:silver;
+  border-style:solid;
+  border-radius:0.25em;
+  height:100%
+  /*padding:1em;*/
+  /*padding-right:0em;*/
+}
+
+#searchText{
+  padding-left:1em;
+}
+
+html{
+  height:100%;
+  width:100%
+}
+body{
+  /*margin:2em;*/
+  height:100%;
+  /*border:5px;*/
+  /*border-color:black;*/
+  /*border-style:solid;*/
+}
