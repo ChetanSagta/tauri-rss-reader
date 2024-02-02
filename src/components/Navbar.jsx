@@ -2,7 +2,7 @@ import './Navbar.css';
 import { invoke } from "@tauri-apps/api/tauri";
 import { useState } from "react";
 
-export default function Navbar(props) {
+export default function Navbar() {
 
   const [urlText, setUrlText] = useState("");
 
@@ -10,10 +10,8 @@ export default function Navbar(props) {
   }
 
   function addURL() {
-    console.log("Add URL function");
-
     invoke('add_new_rss_feed', { url: urlText })
-      .then(message => { console.log("Success: ", message) })
+      .then(message => { console.log("Success: ", message); })
       .catch(message => { console.log("Error: ", message) });
 
     setUrlText("");

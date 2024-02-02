@@ -1,15 +1,14 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
+import SideBar from "./components/SideBar";
 
 export default function App() {
 
   return (
     <>
       <Navbar />
-      <div id="center">
-        <div>
-          This will be the main content of the page
-        </div>
+      <div id="body">
+      <SideBar />
       </div>
     </>
   );

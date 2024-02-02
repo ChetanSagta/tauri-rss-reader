@@ -13,7 +13,7 @@ use super::xmlparser;
 fn parse_xml_feed(){
 
     let content = fs::read_to_string("../rss.xml").unwrap();
-    xmlparser::parse_content(&content);
+    xmlparser::parse_content("https://rss.nytimes.com/services/xml/rss/nyt/World.xml", &content);
 
 
 }

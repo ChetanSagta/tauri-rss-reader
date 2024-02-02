@@ -1,2 +1,3 @@
 https://rss.nytimes.com/services/xml/rss/nyt/World.xml
-
+https://feeds.megaphone.fm/newheights
+https://feeds.simplecast.com/54nAGcIl

@@ -1,0 +1,8 @@
+#mainBody{
+  padding:0.25em;
+  margin:0.25em;
+  border: solid green 2px;
+  flex-grow: 1;
+  overflow-x: auto;
+  width: 80%;
+}
