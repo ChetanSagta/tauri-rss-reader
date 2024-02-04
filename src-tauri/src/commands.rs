@@ -51,8 +51,8 @@ pub fn refresh_all_feeds() -> String {
     let lines = content.split("\n");
 
     for line in lines {
-        println!("DB Refresh: {}", line)
-        //refresh_feed(line);
+        println!("Line: {}",line);
+        refresh_feed(line);
     }
 
     format!("Refreshed all the feed")
@@ -66,8 +66,7 @@ pub fn get_all_feed_names_from_file() -> Result<Vec<String>, String> {
     let lines = content.split("\n");
     let lines_vec: Vec<String> = Vec::new();
     for line in lines {
-        println!("{}",line)
-        //block_on(networking::get_request(line));
+        block_on(networking::get_request(line));
     }
     return Ok(lines_vec);
 }

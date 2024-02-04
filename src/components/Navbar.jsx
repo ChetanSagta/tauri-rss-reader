@@ -11,7 +11,13 @@ export default function Navbar() {
 
   function addURL() {
     invoke('add_new_rss_feed', { url: urlText })
-      .then(message => { console.log("Success: ", message); })
+      .then(message => {
+        invoke('refresh_feed', { name: urlText})
+          .then(
+            document.getElementById('addUrlText').value = "" 
+          )
+          .catch(error => { console.log("Error: ", error); })
+      })
       .catch(message => { console.log("Error: ", message) });
 
     setUrlText("");

@@ -18,17 +18,16 @@ export default function SideBar() {
   }, []);
 
   function refreshFeed(link) {
-    console.log("Link : {}", link)
-    //invoke('refresh_feed', { name: link })
-    //  .then()
-    //  .catch(error => { console.log("Error: ", error); })
+    invoke('refresh_feed', { name: link })
+      .then()
+      .catch(error => { console.log("Error: ", error); })
   }
 
-  //function refreshAllFeeds() {
-  //  invoke('get_all_feed_names_from_file')
-  //    .then()
-  //    .catch(error => { console.log("Error: ", error); })
-  //}
+  function refreshAllFeeds() {
+    invoke('get_all_feed_names_from_file')
+      .then()
+      .catch(error => { console.log("Error: ", error); })
+  }
 
 
   const link_array = [];
@@ -40,7 +39,7 @@ export default function SideBar() {
         <div onClick={() => {
           setSelectedLink(link.link);
         }}>{link.title}</div>
-        <Button type="button" variant="primary" onClick={refreshFeed(link.link)} className="refreshBtn">
+        <Button type="button" variant="primary" onClick={()=>refreshFeed(link.link)} className="refreshBtn">
           REFRESH
         </Button>
       </div>);
@@ -50,9 +49,9 @@ export default function SideBar() {
     <>
       <div id="sidebar">
         {link_array}
-        {/*<Button type="button" variant="primary" onClick={refreshAllFeeds()} className="refreshBtn">
+        <Button type="button" variant="primary" onClick={refreshAllFeeds} className="refreshBtn">
           REFRESH ALL
-        </Button>*/}
+        </Button>
       </div>
       <MainContent link={selectedLink} />
     </>

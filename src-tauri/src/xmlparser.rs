@@ -4,8 +4,6 @@ use crate::{db::{
 
 pub fn parse_content(url: &str, content: &str) {
 
-    println!("URL: {}", url);
-
     let doc = roxmltree::Document::parse(content);
 
     match doc {

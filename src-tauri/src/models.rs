@@ -1,7 +1,8 @@
 use roxmltree::Node;
 use serde::{Deserialize, Serialize};
 
-use crate::db::{insert_into_image};
+use crate::db::insert_into_image;
+use crate::util::{self, date_parser};
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct Image {
@@ -12,11 +13,7 @@ pub struct Image {
 
 impl Image {
     pub fn new(title: String, link: String, url: String) -> Image {
-        Self {
-            title,
-            link,
-            url,
-        }
+        Self { title, link, url }
     }
 
     pub fn get_title(&self) -> String {
@@ -25,7 +22,9 @@ impl Image {
     pub fn get_link(&self) -> String {
         self.link.to_owned()
     }
-    pub fn get_url(&self) -> String { self.url.to_owned() }
+    pub fn get_url(&self) -> String {
+        self.url.to_owned()
+    }
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
@@ -46,9 +45,9 @@ impl Item {
         description: String,
         creator: String,
         pub_date: i64,
-        channel_id : i64,
-        category : String
-    ) -> Self{
+        channel_id: i64,
+        category: String,
+    ) -> Self {
         Self {
             title,
             link,
@@ -75,7 +74,7 @@ impl Item {
     pub fn get_pub_date(&self) -> i64 {
         return self.pub_date;
     }
-    pub fn get_category(&self) ->String {
+    pub fn get_category(&self) -> String {
         return self.category.to_owned();
     }
 }
@@ -176,12 +175,7 @@ fn parse_items(node: Node) -> Item {
                 creator = child.text().unwrap();
             }
             "pubDate" => {
-                publish_date = chrono::DateTime::parse_from_str(
-                    child.text().unwrap(),
-                    "%a, %d %b %Y %H:%M:%S %z",
-                )
-                .unwrap()
-                .timestamp();
+                publish_date = util::date_parser(util::strip_cdata(child.text().unwrap()).as_str());
             }
             "category" => {
                 categories.push(child.text().unwrap_or("").to_string());
@@ -201,7 +195,7 @@ fn parse_items(node: Node) -> Item {
         creator: creator.to_string(),
         pub_date: publish_date,
         category: cat,
-        channel_id: -1
+        channel_id: -1,
     };
 }
 
@@ -257,20 +251,12 @@ pub fn parse_channel<'a>(node: Node<'a, 'a>) -> Channel {
                 description = child.text().unwrap_or("");
             }
             "lastBuildDate" => {
-                last_build_date = chrono::DateTime::parse_from_str(
-                    child.text().unwrap(),
-                    "%a, %d %b %Y %H:%M:%S %z",
-                )
-                .unwrap()
-                .timestamp();
+                last_build_date =
+                    util::date_parser(util::strip_cdata(child.text().unwrap()).as_str());
             }
             "pubDate" => {
-                pub_date = chrono::DateTime::parse_from_str(
-                    child.text().unwrap(),
-                    "%a, %d %b %Y %H:%M:%S %z",
-                )
-                .unwrap()
-                .timestamp();
+                pub_date =
+                    util::date_parser(util::strip_cdata(child.text().unwrap()).as_str());
             }
             "image" => {
                 image = parse_image(&child);
