@@ -8,7 +8,9 @@
 .title{
   display: flex;
   font-size: 2em;
+  color: blue;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .category{

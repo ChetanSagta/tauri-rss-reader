@@ -13,7 +13,7 @@ export default function MainContent(props) {
     return;
   }
   
-  var url = props.link;
+  var url = props.feedsUrl;
 
   useEffect(() => {
     invoke('get_feed_data', { url: url })
@@ -35,7 +35,7 @@ export default function MainContent(props) {
 
   return (
     <div id="mainBody">
-      {items.map((item, index) => { return <Card item={item} key= {index}/> })}
+      {items.map((item, index) => { return <Card item={item} key= {index} selectUrl={(detailUrl) => {props.chooseUrl(detailUrl);}}/> })}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import MainContent from "./MainContent";
 import { Button } from 'react-bootstrap';
 
-export default function SideBar() {
+export default function SideBar(props) {
 
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState('');
@@ -37,7 +37,7 @@ export default function SideBar() {
     link_array.push(
       <div key={++count} className="link">
         <div onClick={() => {
-          setSelectedLink(link.link);
+          props.chooseSite(link.link);
         }}>{link.title}</div>
         <Button type="button" variant="primary" onClick={()=>refreshFeed(link.link)} className="refreshBtn">
           REFRESH
@@ -53,7 +53,6 @@ export default function SideBar() {
           REFRESH ALL
         </Button>
       </div>
-      <MainContent link={selectedLink} />
     </>
   );
 }

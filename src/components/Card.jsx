@@ -2,6 +2,7 @@ import "./Card.css"
 
 export default function Card(props) {
 
+
   let prop = props.item;
   let category = prop['category'];
 
@@ -18,7 +19,10 @@ export default function Card(props) {
 
   return (
     <div id="card">
-      <a className="title" href={prop.link}>{prop.title}({prop.pub_date})</a>
+      <div className="title" href={prop.link} onClick={() => {
+        console.log(prop.link);
+        props.selectUrl(prop.link);
+      }}>{prop.title}({prop.pub_date})</div>
       {category_array}
       <div className="description">{prop.description}</div>
     </div>
